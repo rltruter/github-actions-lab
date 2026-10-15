@@ -1,14 +1,25 @@
-name: Say hello
+name: Python tests
 
-on: workflow_dispatch
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  greet:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Print a greeting
-        run: echo "Hello from GitHub Actions!"
-      - name: Print goodbye
-        if: always()
-        run: echo "Goodbye!"
+      - name: Get repository files
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python -m unittest -v
 
