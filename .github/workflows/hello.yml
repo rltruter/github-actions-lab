@@ -10,3 +10,7 @@ jobs:
         run: echo "Hello from GitHub Actions!"
       - name: Deliberately fail
         run: exit 1
+      - name: Print goodbye
+        if: always()
+        run: echo "Goodbye!"
+
